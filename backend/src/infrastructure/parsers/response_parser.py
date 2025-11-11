@@ -26,8 +26,8 @@ class ResponseParser:
         if json_match:
             return json_match.group(1)
         
-        # Try to find JSON array directly
-        json_match = re.search(r'(\[.*?\])', response_text, re.DOTALL)
+        # Try to find JSON array directly (non-greedy to get first complete array)
+        json_match = re.search(r'(\[[\s\S]*?\])', response_text)
         if json_match:
             return json_match.group(1)
         

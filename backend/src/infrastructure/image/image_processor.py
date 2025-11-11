@@ -1,5 +1,6 @@
 """Image preprocessing for blueprint analysis."""
 
+import base64
 import io
 from typing import Union
 from pathlib import Path
