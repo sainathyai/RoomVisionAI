@@ -1,0 +1,52 @@
+{
+  "lambda_execution_role": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource": "arn:aws:logs:*:*:*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "bedrock:InvokeModel"
+        ],
+        "Resource": "arn:aws:bedrock:*::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "s3:GetObject",
+          "s3:PutObject"
+        ],
+        "Resource": "arn:aws:s3:::roomvisionai-blueprints/*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "textract:DetectDocumentText"
+        ],
+        "Resource": "*"
+      }
+    ]
+  },
+  "api_gateway_invoke_lambda": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "apigateway.amazonaws.com"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Resource": "arn:aws:lambda:*:*:function:room-detection-handler"
+      }
+    ]
+  }
+}
+
